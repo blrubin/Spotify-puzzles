@@ -5,10 +5,15 @@ def getSongQuality(numSongs):
     for i in range(numSongs):
         song = sys.stdin.readline().split()
         title = song[1].rstrip()
-        zi = 1/float(i+1)
-        fi = int(song[0])
-        qi = fi/zi
-        songs.append([title, qi, i])
+        trackNumber = i + 1
+        playCount = int(song[0])
+        
+        # zipfs law predicts frequency should be 1 / track number
+        # quality = play count / predicted frequency
+        # therefore quality = track number * play count
+
+        quality = playCount * trackNumber
+        songs.append([title, quality, trackNumber])
     return songs
 
 def getSelectedSongs(songs):
