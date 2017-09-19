@@ -1,4 +1,5 @@
 import sys
+import heapq
 
 def getSongQuality(numSongs):
     songs = []
@@ -11,13 +12,10 @@ def getSongQuality(numSongs):
         # zipfs law predicts frequency should be 1 / track number
         # quality = play count / predicted frequency
         # therefore quality = track number * play count
-
+        
         quality = playCount * trackNumber
-        songs.append([title, quality, trackNumber])
+        heapq.heappush(songs, (-quality, trackNumber, title))
     return songs
-
-def getSelectedSongs(songs):
-    return sorted(songs, key=lambda x: x[1], reverse=True)
 
 def main():
     firstLine = sys.stdin.readline()
@@ -27,8 +25,8 @@ def main():
     songs = getSongQuality(numSongs)
     selections = getSelectedSongs(songs)
 
-    for song in selections[:numSelected]:
-        print song[0]   
+    for i in range(numSelected):
+        print heapq.heappop(songs)[2]
 
 if __name__ == '__main__':
     main()
