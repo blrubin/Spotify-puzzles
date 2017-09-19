@@ -23,7 +23,6 @@ def main():
     numSelected = int(firstLine.split()[1])
 
     songs = getSongQuality(numSongs)
-    selections = getSelectedSongs(songs)
 
     for i in range(numSelected):
         print heapq.heappop(songs)[2]
